@@ -25,7 +25,7 @@ def read_root():
 def read_root():
     return {"Method": "PUT"}
 
-@app.delete("/")
+@app.delete("/u")
 def read_root():
     return {"Method": "DELETE"}
 
