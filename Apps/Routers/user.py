@@ -24,6 +24,6 @@ def get_user_by_id(id: int):
 def update_user(id: int,user:User = Body(...) ):
     return {"id": id, "user": user}
 
-@user_route.delete("/{user_id}")
-def delete_user(user_id: int):
-    return {"user_id": user_id}
+@user_route.delete("/{id}")
+def delete_user(id: int):
+    return {"id": id}
