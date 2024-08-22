@@ -23,3 +23,7 @@ def get_house_by_id(id: int):
 @house_route.put("/{id}")
 def update_house(id: int,house:House = Body(...)):
     return {"id": id, "house": house}
+
+@house_route.delete("/{id}")
+def delete_house(id: int):
+    return {"id": id}

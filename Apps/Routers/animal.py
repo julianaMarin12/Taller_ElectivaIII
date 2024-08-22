@@ -23,3 +23,7 @@ def get_animal_by_id(id: int):
 @animal_route.put("/{id}")
 def update_animal(id: int,animal:Animal = Body(...)):
     return {"id": id, "animal": animal}
+
+@animal_route.delete("/{id}")
+def delete_animal(id: int):
+    return {"id": id}

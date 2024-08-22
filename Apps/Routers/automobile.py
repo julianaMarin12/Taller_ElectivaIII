@@ -23,3 +23,7 @@ def get_automobile_by_id(id: int):
 @automobile_route.put("/{id}")
 def update_automobile(id: int,automobile:Automobile = Body(...)):
     return {"id": id, "automobile": automobile}
+
+@automobile_route.delete("/{id}")
+def delete_automobile(id: int):
+    return {"id": id}

@@ -23,3 +23,7 @@ def get_phone_by_id(id: int):
 @phone_route.put("/{id}")
 def update_phone(id: int,phone:Phone = Body(...)):
     return {"id": id, "phone": phone}
+
+@phone_route.delete("/{id}")
+def delete_phone(id: int):
+    return {"id": id}

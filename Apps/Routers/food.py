@@ -23,3 +23,8 @@ def get_food_by_id(id: int):
 @food_route.put("/{id}")
 def update_food(id: int,food:Food = Body(...)):
     return {"id": id, "food": food}
+
+
+@food_route.delete("/{id}")
+def delete_food(id: int):
+    return {"id": id}
