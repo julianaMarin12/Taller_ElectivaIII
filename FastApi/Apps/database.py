@@ -8,12 +8,11 @@ database = MySQLDatabase(
     os.getenv("MYSQL_DATABASE"),
     user= os.getenv("MYSQL_USER"),
     passwd = os.getenv("MYSQL_PASSWORD"),
-    host = os.getenv("MYSQL_HOST"),
-    port = int(os.getenv("MYSQL_PORT")),
+    host = os.getenv("MYSQL_HOST")
 )
 
 class UserModel(Model):
-    id = AutoField(prymary_key = True)
+    id_user = AutoField(primary_key=True)
     username = CharField(max_length = 50)
     email = CharField(max_length = 50)
     pasword = CharField(max_length = 50)
@@ -21,3 +20,4 @@ class UserModel(Model):
     class meta:
         database = database
         tabla_name = "users"
+

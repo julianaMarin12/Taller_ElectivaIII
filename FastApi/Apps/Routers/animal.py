@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body
-from Apps.models.animal import Animal
+from models.animal import Animal
 
 
 animal_route = APIRouter()

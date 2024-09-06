@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body
-from Apps.models.phone import Phone
+from models.phone import Phone
 
 
 phone_route = APIRouter()

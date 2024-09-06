@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body
-from Apps.models.house import House
+from models.house import House
 
 
 house_route = APIRouter()

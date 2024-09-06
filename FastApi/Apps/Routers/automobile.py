@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body
-from Apps.models.automobile import Automobile
+from models.automobile import Automobile
 
 
 automobile_route = APIRouter()

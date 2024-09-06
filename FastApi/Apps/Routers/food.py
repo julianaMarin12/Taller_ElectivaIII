@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body
-from Apps.models.food import Food
+from models.food import Food
 
 
 food_route = APIRouter()
