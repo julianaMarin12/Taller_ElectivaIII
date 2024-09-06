@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Automobile(BaseModel):
-    door: int
+    id: int
     name: str
     price: float
     classification: str

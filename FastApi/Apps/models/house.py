@@ -1,8 +1,8 @@
 from pydantic import BaseModel
 
 class House(BaseModel):
-    bathroom: int
+    id: int
     name: str
     price: str
     classification: str
-    room: int
+    room: str

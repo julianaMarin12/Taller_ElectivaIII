@@ -1,29 +1,24 @@
 from fastapi import APIRouter, Body
 from models.automobile import Automobile
+from database import AutomobileModel
 
 
 automobile_route = APIRouter()
 
 @automobile_route.post("/")
-def create_automobile (automobile:Automobile = Body(...)):
+def create_automobile(automobile: Automobile = Body(...)):
+    AutomobileModel.create(name= automobile.name, price =automobile.price, detail = automobile.detail)
+    return {"message": "Food created successfully"}
+
+@automobile_route.get("/")
+def get_automobile():
+    automobile = AutomobileModel.select().where(AutomobileModel.id_house > 0).dicts()
+    return list(automobile)
+
+@automobile_route.get("/{automobile_id}")
+def get_automobile(automobile_id: int):
     try:
+        automobile = AutomobileModel.get(AutomobileModel.id_automobile == automobile_id)
         return automobile
-    except Exception as e:
-        print(e)
-        return {"error":str(e)}
-
-@automobile_route.get("/{id}")
-def guardar():
-    return {"mensaje": "Guardado con éxito"}
-
-@automobile_route.get("/{id}")
-def get_automobile_by_id(id: int):
-    return {"id": id}
-
-@automobile_route.put("/{id}")
-def update_automobile(id: int,automobile:Automobile = Body(...)):
-    return {"id": id, "automobile": automobile}
-
-@automobile_route.delete("/{id}")
-def delete_automobile(id: int):
-    return {"id": id}
+    except AutomobileModel.DoesNotExist:
+        return {"error": "Food not found"}

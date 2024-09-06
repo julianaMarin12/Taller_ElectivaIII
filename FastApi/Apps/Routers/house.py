@@ -1,29 +1,24 @@
 from fastapi import APIRouter, Body
 from models.house import House
+from database import HouseModel
 
 
 house_route = APIRouter()
 
 @house_route.post("/")
-def create_house (house:House = Body(...)):
+def create_house(house: House = Body(...)):
+    HouseModel.create( name= house.name, price =house.price, classification = house.classification, room = house.room)
+    return {"message": "House created successfully"}
+
+@house_route.get("/")
+def get_house():
+    house = HouseModel.select().where(HouseModel.id_house > 0).dicts()
+    return list(house)
+
+@house_route.get("/{house_id}")
+def get_house(house_id: int):
     try:
+        house = HouseModel.get(HouseModel.id_house == house_id)
         return house
-    except Exception as e:
-        print(e)
-        return {"error":str(e)}
-
-@house_route.get("/{id}")
-def guardar():
-    return {"mensaje": "Guardado con éxito"}
-
-@house_route.get("/{id}")
-def get_house_by_id(id: int):
-    return {"id": id}
-
-@house_route.put("/{id}")
-def update_house(id: int,house:House = Body(...)):
-    return {"id": id, "house": house}
-
-@house_route.delete("/{id}")
-def delete_house(id: int):
-    return {"id": id}
+    except HouseModel.DoesNotExist:
+        return {"error": "House not found"}
