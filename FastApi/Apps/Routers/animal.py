@@ -1,29 +1,24 @@
 from fastapi import APIRouter, Body
 from models.animal import Animal
+from database import AnimalModel
 
 
 animal_route = APIRouter()
 
 @animal_route.post("/")
-def create_animal (animal:Animal = Body(...)):
+def create_animal(animal: Animal = Body(...)):
+        AnimalModel.create(name= animal.name, id =animal.id, gender = animal.gender, classification = animal.classification, age = animal.age, owner = animal.owner)
+        return {"message": "Food created successfully"}
+
+@animal_route.get("/")
+def get_animal():
+    animal = AnimalModel.select().where(AnimalModel.id_animal > 0).dicts()
+    return list(animal)
+
+@animal_route.get("/{animal_id}")
+def get_animal(animal_id: int):
     try:
+        animal = AnimalModel.get(AnimalModel.id_animal ==  animal_id)
         return animal
-    except Exception as e:
-        print(e)
-        return {"error":str(e)}
-
-@animal_route.get("/{id}")
-def guardar():
-    return {"mensaje": "Guardado con éxito"}
-
-@animal_route.get("/{id}")
-def get_animal_by_id(id: int):
-    return {"id": id}
-
-@animal_route.put("/{id}")
-def update_animal(id: int,animal:Animal = Body(...)):
-    return {"id": id, "animal": animal}
-
-@animal_route.delete("/{id}")
-def delete_animal(id: int):
-    return {"id": id}
+    except AnimalModel.DoesNotExist:
+        return {"error": "Food not found"}
